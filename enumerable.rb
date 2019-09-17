@@ -22,11 +22,17 @@ end
     return array
   end
 
-  def my_all?
-    my_each do |i|
-      return true unless block_given?
-      result = yield(i)
-      return false unless result
+  def my_all? 
+    unless block_given?
+        self.my_each{|i|
+            return false unless i
+        }
+        return true
+    else
+        self.my_each {|i| 
+            return false unless yield(i)
+        }
+        return true
     end
   end
 
