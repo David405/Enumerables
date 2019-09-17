@@ -42,12 +42,23 @@ end
     false
   end
 
-  def my_none?
-    return true unless block_given?
-    my_each do |i|
-      return true unless yield(i)
+  def my_none?(obj = nil)
+    if obj
+      my_each{|i|
+        return false if i.class == obj
+        }
+      true
+    elsif block_given?
+      my_each {|i| 
+        return false if yield(i)
+        }
+      true
+    else
+      my_each {|i|
+        return false if i
+        }
+      true
     end
-    false
   end
 
   def my_count(obj = nil)
