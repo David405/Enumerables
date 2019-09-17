@@ -23,26 +23,46 @@ end
   end
 
   def my_all?
-    my_each do |i|
-      return true unless block_given?
-      result = yield(i)
-      return false unless result
+    if !block_given?
+      my_each do |i|
+        return false unless i
+      end
+    else
+      my_each do |i|
+        return false unless yield(i)
+      end
+      true
     end
   end
 
   def my_any?
-    my_each do |i|
-      return true if yield(i)
+    result = false
+    if block_given?
+      my_each do |i|
+        result = true if yield(i)
       end
-    false
+    else
+      my_each do |i|
+        result = true if i
+      end
+    end
+    result
   end
 
-  def my_none?
-    return true unless block_given?
-    my_each do |i|
-      return true unless yield(i)
+  def my_none?(obj = nil)
+    if obj
+      my_each do |i|
+        return false if i.class == obj
+      end
+    elsif block_given?
+      my_each do |i|
+        return false if yield(i)
+      end
+    else
+      my_each do |i|
+        return false if i
+      end
     end
-    false
   end
 
   def my_count(obj = nil)
