@@ -31,7 +31,7 @@ end
       my_each do |i|
         return false unless yield(i)
       end
-        true
+    true
     end
   end
 
