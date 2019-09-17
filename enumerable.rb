@@ -24,14 +24,14 @@ end
 
   def my_all?
     if !block_given?
-      self.my_each do|i|
-          return false unless i
+      my_each do |i|
+        return false unless i
       end
     else
-      self.my_each do|i| 
-          return false unless yield(i)
+      my_each do |i|
+        return false unless yield(i)
       end
-        return true
+        true
     end
   end
 
