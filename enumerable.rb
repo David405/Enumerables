@@ -44,20 +44,17 @@ end
 
   def my_none?(obj = nil)
     if obj
-      my_each{|i|
-        return false if i.class == obj
-        }
-      true
+      my_each do |i|
+          return false if i.class == obj
+      end
     elsif block_given?
-      my_each {|i| 
-        return false if yield(i)
-        }
-      true
+      my_each do |i| 
+          return false if yield(i)
+      end
     else
-      my_each {|i|
-        return false if i
-        }
-      true
+      my_each do |i|
+          return false if i
+      end
     end
   end
 
