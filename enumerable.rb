@@ -36,10 +36,17 @@ end
   end
 
   def my_any?
-    my_each do |i|
-      return true if yield(i)
+    result = false
+    if block_given?
+      my_each do |i|
+        result = true if yield(i)
       end
-    false
+    else
+      my_each do |i|
+        result = true if i
+      end
+    end
+    result
   end
 
   def my_none?(obj = nil)
