@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     for i in 0...self.length
@@ -15,7 +17,7 @@ end
     array = Array.new
     i = 0
     while i < size
-      array << self[i] if yield(self[i])  unless !block_given?
+      array << self[i] if yield(self[i])  if block_given?
       i += 1
     end
 
