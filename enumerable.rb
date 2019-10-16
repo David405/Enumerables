@@ -1,13 +1,13 @@
 module Enumerable
   def my_each
     for i in 0...self.length
-        yield(self[i]) if block_given?
+      yield(self[i]) if block_given?
     end
 end
 
-  def my_each_with_index 
+  def my_each_with_index
     for i in 0...self.length
-        yield(self[i], i) if block_given?
+      yield(self[i], i) if block_given?
     end
 end
 
@@ -15,7 +15,7 @@ end
     array = Array.new
     i = 0
     while i < size
-      array << self[i] if yield(self[i])
+      array << self[i] if yield(self[i]) if block_given?
       i += 1
     end
 
@@ -82,21 +82,21 @@ end
     count
   end
 
-    def my_map(&block)
-      arr = []
-      my_each do |i|
-        arr << block.call(i)
-      end
-      arr
+  def my_map(&block)
+    arr = []
+    my_each do |i|
+      arr << block.call(i)
+    end
+    arr
+  end
+
+  def my_inject(obj = nil)
+    accumulator = obj ? obj : self.shift
+
+    self.my_each do |i|
+      accumulator = yield(accumulator, i)
     end
 
-    def my_inject(obj=nil)
-      accumulator = obj ? obj : self.shift
-
-      self.my_each do |i|
-        accumulator = yield(accumulator, i)
-      end
-
-      accumulator
-    end
+    accumulator
+  end
 end
