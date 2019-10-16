@@ -93,7 +93,7 @@ end
   end
 
   def my_inject(obj = nil)
-    accumulator = obj || self.shift
+    accumulator = obj || shift
 
     my_each do |i|
       accumulator = yield(accumulator, i)
