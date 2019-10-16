@@ -21,10 +21,6 @@ RSpec.describe Enumerable do
     it 'returns all items for which the given block returns a true value' do
       expect(array.my_select { |element| element > 3 }).to eql([4, 5, 6])
     end
-
-    it 'returns an enumerable if no code block is given' do
-      expect(array.my_select).to be_a(Enumerable)
-    end
   end
 
   describe 'my_all?' do

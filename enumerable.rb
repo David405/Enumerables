@@ -17,7 +17,7 @@ end
     array = Array.new
     i = 0
     while i < size
-      array << self[i] if yield(self[i])  if block_given?
+      array << self[i] if yield(self[i]) 
       i += 1
     end
 
