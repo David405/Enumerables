@@ -17,7 +17,7 @@ end
     array = Array.new
     i = 0
     while i < size
-      array << self[i] if yield(self[i]) 
+      array << self[i] if yield(self[i])
       i += 1
     end
 
@@ -70,11 +70,11 @@ end
   def my_count(obj = nil)
     count = 0
     if block_given?
-      self.my_each do |i|
+      my_each do |i|
         count += 1 if yield(i)
       end
     elsif obj
-      self.my_each do |i|
+      my_each do |i|
         count += 1 if i == obj
       end
     else
@@ -93,9 +93,9 @@ end
   end
 
   def my_inject(obj = nil)
-    accumulator = obj ? obj : self.shift
+    accumulator = obj || self.shift
 
-    self.my_each do |i|
+    my_each do |i|
       accumulator = yield(accumulator, i)
     end
 
