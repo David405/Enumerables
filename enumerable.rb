@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     for i in 0...self.length
-        yield(self[i]) if block_given?
+      yield(self[i]) if block_given?
     end
 end
 
-  def my_each_with_index 
+  def my_each_with_index
     for i in 0...self.length
-        yield(self[i], i) if block_given?
+      yield(self[i], i) if block_given?
     end
 end
 
@@ -68,11 +70,11 @@ end
   def my_count(obj = nil)
     count = 0
     if block_given?
-      self.my_each do |i|
+      my_each do |i|
         count += 1 if yield(i)
       end
     elsif obj
-      self.my_each do |i|
+      my_each do |i|
         count += 1 if i == obj
       end
     else
@@ -82,21 +84,21 @@ end
     count
   end
 
-    def my_map(&block)
-      arr = []
-      my_each do |i|
-        arr << block.call(i)
-      end
-      arr
+  def my_map(&block)
+    arr = []
+    my_each do |i|
+      arr << block.call(i)
+    end
+    arr
+  end
+
+  def my_inject(obj = nil)
+    accumulator = obj || shift
+
+    my_each do |i|
+      accumulator = yield(accumulator, i)
     end
 
-    def my_inject(obj=nil)
-      accumulator = obj ? obj : self.shift
-
-      self.my_each do |i|
-        accumulator = yield(accumulator, i)
-      end
-
-      accumulator
-    end
+    accumulator
+  end
 end
